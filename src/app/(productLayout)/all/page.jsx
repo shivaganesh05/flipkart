@@ -6,6 +6,8 @@ import { useSearch } from "@/app/SearchContext";
 
 const ElectronicsList = () => {
   const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+  
   const router = useRouter();
     const { searchTerm } = useSearch();
   
@@ -18,6 +20,9 @@ const ElectronicsList = () => {
     } catch (error) {
       console.error("Error loading products:", error);
     }
+     finally {
+    setIsLoading(false);
+  }
   };
 
     const filteredProducts = products.filter((product) => {
@@ -34,6 +39,10 @@ const ElectronicsList = () => {
   const handleClick = (id) => {
     router.push(`/product/${id}`);
   };
+
+    if (isLoading) {
+    return <p className="text-center mt-10 text-gray-500">Loading products...</p>;
+  }
 
   return (
     <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

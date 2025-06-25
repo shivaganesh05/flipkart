@@ -13,33 +13,33 @@ const Page = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchCategoryData = async () => {
-      try {
-        const res = await getProductCategoryLists(catagoryId);
-        setCategoryProducts(res);
-      } catch (error) {
-        console.error("Error fetching category products:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+const fetchAllData = async () => {
+  try {
+    const res = await getProductsLists();
+    setAllProducts(res);
+  } catch (error) {
+    console.error("Error fetching all products:", error);
+  }
+};
 
-    fetchCategoryData();
-  }, [catagoryId]);
+const fetchCategoryData = async () => {
+  try {
+    const res = await getProductCategoryLists(catagoryId);
+    setCategoryProducts(res);
+  } catch (error) {
+    console.error("Error fetching category products:", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-  useEffect(() => {
-    const fetchAllData = async () => {
-      try {
-        const res = await getProductsLists();
-        setAllProducts(res);
-      } catch (error) {
-        console.error("Error fetching all products:", error);
-      }
-    };
+useEffect(() => {
+  fetchAllData(); 
+}, []);
 
-    fetchAllData();
-  }, []);
+useEffect(() => {
+  fetchCategoryData(); 
+}, [catagoryId]);
 
 
   const filteredProducts = allProducts.filter((product) => {
