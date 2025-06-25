@@ -34,17 +34,18 @@ const Page = () => {
       >
         <CarouselContent>
           {images.map((img, index) => (
-            <CarouselItem key={index}>
-              <div className="relative w-full h-[390px]">
-                <Image
-                  src={img}
-                  alt={`Slide ${index + 1}`}
-                  fill
-                  className="object-cover rounded"
-                  priority={index === 0}
-                />
-              </div>
-            </CarouselItem>
+           <CarouselItem key={index}>
+  <div className="relative w-full h-[200px] mx-2 sm:h-[300px] md:h-[390px] lg:h-[480px]">
+    <Image
+      src={img}
+      alt={`Slide ${index + 1}`}
+      fill
+      className="object-cover rounded"
+      priority={index === 0}
+    />
+  </div>
+</CarouselItem>
+
           ))}
         </CarouselContent>
 

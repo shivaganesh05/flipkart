@@ -12,7 +12,7 @@ const images = [
 
 const DashboardContent = () => {
   return (
-    <div className="w-full max-w-[1620px] mx-auto grid grid-cols-1 gap-4 px-4">
+    <div className="w-full max-w-[1620px] mx-auto grid grid-cols-1 gap-4 px-2">
       {images.map((img, index) => (
         <div key={index} className="relative w-full h-[200px] md:h-[390px]">
           <Image

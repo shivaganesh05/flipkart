@@ -21,18 +21,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <div className="flex-1 overflow-y-auto overflow-x-hidden max-h-100vh z-30">
-
-          {/* <div className="flex-1 overflow-y-auto overflow-x-hidden max-h-[calc(100vh)] z-30"> */}
-            <MainHeader />
-                      <CategoryNavbar />
-
-            <div>{children}</div>
-          </div>
+        <div className="flex-1 overflow-y-auto overflow-x-hidden max-h-100vh z-30">
+          <MainHeader />
+          <CategoryNavbar />
+          <div>{children}</div>
+        </div>
       </body>
     </html>
   );
