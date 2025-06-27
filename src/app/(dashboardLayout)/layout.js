@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import MainHeader from "@/components/mainHeader";
 import CategoryNavbar from "../../components/navbar";
+import { CartProvider } from "@/context/cartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex-1 overflow-y-auto overflow-x-hidden max-h-100vh z-30">
+          <CartProvider>
           <MainHeader />
           <CategoryNavbar />
           <div>{children}</div>
+          </CartProvider>
         </div>
       </body>
     </html>

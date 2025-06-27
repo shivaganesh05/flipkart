@@ -26,6 +26,18 @@ const Page = () => {
 
   return (
     <div className="w-full max-w-[1620px] mx-auto overflow-hidden">
+       <Image
+        src="/banner2.webp"
+        alt="Flipkart Logo"
+        width={1620}
+        height={390}
+      />
+      <Image
+        src="/topDeals.jpg"
+        alt="Flipkart Logo"
+        width={1620}
+        height={390}
+      />
       <Carousel
         plugins={[plugin.current]}
         className="relative"

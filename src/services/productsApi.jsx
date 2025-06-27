@@ -1,4 +1,3 @@
-// services/assetService.js
 import axios from 'axios';
 
 export const getProductsLists = async () => {
@@ -11,7 +10,6 @@ export const getProductsLists = async () => {
   }
 };
 
-
 export const getProductCategoryLists = async (categoryName) => {
   try {
     const response = await axios.get(`https://fakestoreapi.com/products/category/${categoryName}`);
@@ -21,8 +19,6 @@ export const getProductCategoryLists = async (categoryName) => {
     throw error;
   }
 };
-
-
 
 export const postLogin = async (value) => {
   try {
@@ -44,27 +40,15 @@ export const getCartLists = async () => {
   }
 };
 
-// ✅ New helper to fetch product details from cart
-export const getCartProductsWithDetails = async (cartProducts) => {
+export const getProductById = async (productId) => {
   try {
-    const productDetails = await Promise.all(
-      cartProducts.map(async (item) => {
-        const res = await axios.get(`https://fakestoreapi.com/products/${item.productId}`);
-        return {
-          ...res.data,
-          quantity: item.quantity,
-          total: (res.data.price * item.quantity).toFixed(3),
-        };
-      })
-    );
-    return productDetails;
+    const res = await axios.get(`https://fakestoreapi.com/products/${productId}`);
+    return res.data;
   } catch (error) {
-    console.error("Failed to fetch product details:", error);
+    console.error(`Failed to fetch product with ID ${productId}:`, error);
     throw error;
   }
 };
-
-
 
 export const addUser = async () => {
   try {

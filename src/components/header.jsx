@@ -28,11 +28,14 @@ import {
 } from "@/components/ui/dialog";
 import Login from "./login";
 import { usePathname } from "next/navigation";
-import { useSearch } from "@/app/SearchContext";
+import { useSearch } from "@/components/SearchContext";
+import { useCart } from "@/context/cartContext";
 const Header = () => {
   const { searchTerm, setSearchTerm } = useSearch();
 
   const pathname = usePathname();
+  const { cartItems } = useCart();
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const isActive = pathname === "/cart";
   return (
@@ -115,10 +118,19 @@ const Header = () => {
         hover:bg-white/20 hover:text-white`}
           >
             <ShoppingCart className="w-5 h-5" />
-            <Link href="/cart">
-              <span>Cart</span>
+           <Link href="/cart" className="relative">
+       <span className="relative">
+            Cart
+            {cartCount > 0 && (
+              <span className="ml-1 bg-white text-blue-600 px-2 rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </span>
             </Link>
+            
           </div>
+
         </div>
       </div>
     </header>

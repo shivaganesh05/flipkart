@@ -26,12 +26,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
+import { useCart } from "@/context/cartContext";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const MainHeader = () => {
   const [position, setPosition] = React.useState("left");
-  
+  const pathname = usePathname();
 
+  const { cartItems } = useCart();
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const isActive = pathname === "/cart";
   return (
     <div className="w-full px-4 py-3 shadow-sm border-b-1 border-gray-300">
       <div className="flex items-center justify-between md:hidden">
@@ -73,89 +79,101 @@ const MainHeader = () => {
             <Input
               className="w-[730px] h-11 pl-10 border-0 bg-[#F0F5FF] text-lg 
                      placeholder:text-lg placeholder:font-sans placeholder:text-gray-500"
-            placeholder="Search for products, Category "
+              placeholder="Search for products, Category "
             />
           </div>
-     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center bg-white text-black hover:bg-blue-500 hover:text-white px-4 py-1 rounded-sm text-sm font-medium hover:shadow-sm">
-          <User className="w-4 h-4 mr-1" />
-          Login
-          <ChevronDown className="w-4 h-4 ml-1" />
-        </button>
-      </DropdownMenuTrigger>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center bg-white text-black hover:bg-blue-500 hover:text-white px-4 py-1 rounded-sm text-sm font-medium hover:shadow-sm">
+                <User className="w-4 h-4 mr-1" />
+                Login
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+            </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-64 mt-2 shadow-lg rounded-lg px-2 py-3">
-        <div className="flex justify-between items-center px-2 mb-2">
-          <p className="text-sm text-gray-500">New customer?</p>
-          <button className="text-[#2874f0] text-sm font-semibold hover:underline">
-            Sign Up
-          </button>
-        </div>
-        <DropdownMenuSeparator />
+            <DropdownMenuContent className="w-64 mt-2 shadow-lg rounded-lg px-2 py-3">
+              <div className="flex justify-between items-center px-2 mb-2">
+                <p className="text-sm text-gray-500">New customer?</p>
+                <button className="text-[#2874f0] text-sm font-semibold hover:underline">
+                  Sign Up
+                </button>
+              </div>
+              <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="gap-2 text-sm">
-          <User className="w-4 h-4 text-black" />
-          My Profile
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2 text-sm">
-          <BadgePercent className="w-4 h-4 text-black" />
-          Flipkart Plus Zone
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2 text-sm">
-          <Package className="w-4 h-4 text-black" />
-          Orders
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2 text-sm">
-          <Heart className="w-4 h-4 text-black" />
-          Wishlist
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2 text-sm">
-          <Gift className="w-4 h-4 text-black" />
-          Rewards
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2 text-sm">
-          <CreditCard className="w-4 h-4 text-black" />
-          Gift Cards
-        </DropdownMenuItem>
-      </DropdownMenuContent>
+              <DropdownMenuItem className="gap-2 text-sm">
+                <User className="w-4 h-4 text-black" />
+                My Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 text-sm">
+                <BadgePercent className="w-4 h-4 text-black" />
+                Flipkart Plus Zone
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 text-sm">
+                <Package className="w-4 h-4 text-black" />
+                Orders
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 text-sm">
+                <Heart className="w-4 h-4 text-black" />
+                Wishlist
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 text-sm">
+                <Gift className="w-4 h-4 text-black" />
+                Rewards
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 text-sm">
+                <CreditCard className="w-4 h-4 text-black" />
+                Gift Cards
+              </DropdownMenuItem>
+            </DropdownMenuContent>
           </DropdownMenu>
 
-          <button className="flex items-center mx-5">
-            <ShoppingCart className="text-black/70" />
-            <span className="mx-2">Cart</span>
-          </button>
+          <div
+            className={`flex items-center gap-1 cursor-pointer px-3 py-1 rounded transition-all
+        ${isActive ? "text-black bg-blue-600" : "text-black"}
+        hover:bg-white/20 hover:text-black`}
+          >
+            <ShoppingCart className="w-5 h-5" />
+            <Link href="/cart" className="relative">
+              Cart
+              <span className="relative">
+                {cartCount > 0 && (
+                  <span className="ml-1 bg-blue-600 text-white px-2 rounded-full">
+                    {cartCount}
+                  </span>
+                )}
+              </span>
+            </Link>
+          </div>
 
           <button className="hidden md:flex items-center ms-4 whitespace-nowrap text-black/70">
             <Gift />
             <span className="ms-2">Become A Seller</span>
           </button>
-  <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <span className="hidden ml-10 md:flex items-center gap-1 cursor-pointer text-white text-sm font-medium">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <span className="hidden ml-10 md:flex items-center gap-1 cursor-pointer text-white text-sm font-medium">
                 <EllipsisVertical className="text-black/70" />
-        </span>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 shadow-md">
-        <DropdownMenuItem className="gap-2">
-          <Bell className="w-4 h-4 text-blue-500" />
-          Notification Preferences
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2">
-          <HelpCircle className="w-4 h-4 text-blue-500" />
-          24x7 Customer Care
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2">
-          <TrendingUp className="w-4 h-4 text-blue-500" />
-          Advertise
-        </DropdownMenuItem>
-        <DropdownMenuItem className="gap-2">
-          <Download className="w-4 h-4 text-blue-500" />
-          Download App
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-        
+              </span>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 shadow-md">
+              <DropdownMenuItem className="gap-2">
+                <Bell className="w-4 h-4 text-blue-500" />
+                Notification Preferences
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2">
+                <HelpCircle className="w-4 h-4 text-blue-500" />
+                24x7 Customer Care
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2">
+                <TrendingUp className="w-4 h-4 text-blue-500" />
+                Advertise
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2">
+                <Download className="w-4 h-4 text-blue-500" />
+                Download App
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
