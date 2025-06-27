@@ -56,11 +56,14 @@ export default function CartPage() {
       <div className="mt-6 text-right">
         <p className="text-xl font-bold">Total: ₹{total.toFixed(2)}</p>
         <button
-          onClick={clearCart}
-          className="mt-2 bg-black text-white px-4 py-2 rounded"
+          className=" bg-black mt-4 text-white px-4 py-2 rounded"
         >
           Clear Cart
         </button>
+         <button
+ className=" bg-blue-600 mt-4 ms-16 text-white px-4 py-2 rounded"            >
+              Buy it now
+            </button>
       </div>
     </div>
   );

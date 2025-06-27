@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import CarouselBanner from "../../components/carouselBanner";
+import CarouselBanner from "../../components/common/carouselBanner";
 import Image from "next/image";
 import DashboardContent from "../../components/DashboardContent";
 

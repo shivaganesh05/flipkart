@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Input } from '@/components/ui/input';
-import UserForm from './userForm';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from './ui/dialog';
+import UserForm from '../userForm';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '../ui/dialog';
 
 const Login = () => {
       const handleLogin = async () => {
