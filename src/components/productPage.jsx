@@ -36,7 +36,7 @@ export default function ProductDetailPage() {
           <div>
             <h2 className="text-3xl font-bold mb-2">{product.title}</h2>
             <p className="text-green-600 text-2xl font-bold mb-4">
-              ₹{(product.price * quantity).toFixed(2)}
+              ₹{(product.price * quantity)}
             </p>
 
             <div className="mb-4">
